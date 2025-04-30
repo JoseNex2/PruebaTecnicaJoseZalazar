@@ -1,0 +1,14 @@
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\bin\Debug\net8.0\entities.deps.json
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\bin\Debug\net8.0\entities.runtimeconfig.json
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\bin\Debug\net8.0\entities.dll
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\bin\Debug\net8.0\entities.pdb
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.csproj.AssemblyReference.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.AssemblyInfoInputs.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.AssemblyInfo.cs
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.dll
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\refint\entities.dll
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.pdb
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.genruntimeconfig.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\ref\entities.dll
