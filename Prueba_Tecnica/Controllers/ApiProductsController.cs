@@ -4,13 +4,12 @@ using DataAccess.Generic;
 using entities.DataContext.Dtos;
 using entities.Domain;
 using Microsoft.AspNetCore.Mvc;
-using Pomelo.EntityFrameworkCore.MySql.Query.Expressions.Internal;
 
 namespace Prueba_Tecnica.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ApiProductController : Controller
+    public class ApiProductController : ControllerBase
     {
         private readonly IGenericRepository<Product> _genericRepository;
         private readonly IUnitOfWork _unitOfWork;
@@ -38,9 +37,9 @@ namespace Prueba_Tecnica.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var products = await _genericRepository.GetProductByIdAsync(id);
+            var products = await _genericRepository.GetByIdAsync(id);
             if (products == null)
-                return NotFound(new {msj= $"El producto con id {id} no existe"});
+                return NotFound(new { msj = $"El producto con id {id} no existe" });
             else { return Ok(products); }
         }
         [HttpPost]
@@ -48,6 +47,9 @@ namespace Prueba_Tecnica.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            var category = await _unitOfWork.Context.categories.FindAsync(productDto.categoryId);
+            if (category == null)
+                return BadRequest(new { msj = "La categoría especificada no existe." });
 
             var product = new Product
             {
@@ -55,13 +57,14 @@ namespace Prueba_Tecnica.Controllers
                 description = productDto.description,
                 price = productDto.price,
                 quantity = productDto.quantity
-            };
 
+            };
+        
             try
             {
-                if (await _genericRepository.CreateProductAsync(product))
+                if (await _genericRepository.CreateAsync(product))
                 {
-                    _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
                     return Ok(new { msj = "Producto creado con éxito." });
                 }
                 else
@@ -91,9 +94,9 @@ namespace Prueba_Tecnica.Controllers
 
             try
             {
-                if (await _genericRepository.UpdateProductAsync(id, product))
+                if (await _genericRepository.UpdateAsync(id, product))
                 {
-                    _unitOfWork.Commit();
+                    await _unitOfWork.CommitAsync();
                     return Ok(new { mensaje = "Producto actualizado correctamente." });
                 }
 
@@ -110,9 +113,9 @@ namespace Prueba_Tecnica.Controllers
         {
             try
             {
-                if (await _genericRepository.DeleteProductByIdAsync(id))
+                if (await _genericRepository.DeleteByIdAsync(id))
                 {
-                    _unitOfWork.Commit(); 
+                    await _unitOfWork.CommitAsync(); 
                     return Ok(new { message = "Producto borrado con exito" });
                 }
                 return NotFound(new {msj = $"El producto con id {id} no existe" });

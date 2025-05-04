@@ -11,10 +11,10 @@ namespace DataAccess.Generic
     public interface IGenericRepository<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetProductByIdAsync(int id);
-        Task<bool> CreateProductAsync(T entity);
-        Task<bool> UpdateProductAsync(int id, T entity);
-        Task<bool> DeleteProductByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
+        Task<bool> CreateAsync(T entity);
+        Task<bool> UpdateAsync(int id, T entity);
+        Task<bool> DeleteByIdAsync(int id);
     }
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -37,7 +37,7 @@ namespace DataAccess.Generic
                 throw;
             }
         }
-        public async Task<T> GetProductByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace DataAccess.Generic
                 throw;
             }
         }
-        public async Task<bool> CreateProductAsync(T entiti)
+        public async Task<bool> CreateAsync(T entiti)
         {
             try
             {
@@ -62,11 +62,11 @@ namespace DataAccess.Generic
                 throw;
             }
         }
-        public async Task<bool> UpdateProductAsync(int id, T entity)
+        public async Task<bool> UpdateAsync(int id, T entity)
         {
             try
             {
-                T existingEntity = await GetProductByIdAsync(id);
+                T existingEntity = await GetByIdAsync(id);
                 if (existingEntity != null)
                 {
                     PropertyInfo[] properties = entity.GetType().GetProperties();
@@ -91,11 +91,11 @@ namespace DataAccess.Generic
                 throw;
             }
         }
-        public async Task<bool> DeleteProductByIdAsync(int id)
+        public async Task<bool> DeleteByIdAsync(int id)
         {
             try
             {
-                T entity = await GetProductByIdAsync(id);
+                T entity = await GetByIdAsync(id);
                 if(entity != null)
                 {
                     _unitOfWork.Context.Set<T>().Remove(entity);

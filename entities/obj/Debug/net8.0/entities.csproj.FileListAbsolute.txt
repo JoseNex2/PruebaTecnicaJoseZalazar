@@ -7,6 +7,7 @@ C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.AssemblyInfoInputs.cache
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.AssemblyInfo.cs
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.sourcelink.json
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.dll
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\refint\entities.dll
 C:\Users\Usuario\source\repos\Prueba_Tecnica\entities\obj\Debug\net8.0\entities.pdb

@@ -1,5 +1,63 @@
 [
   {
+    "ContainingType": "Prueba_Tecnica.Controllers.ApiCategoryController",
+    "Method": "GetAll",
+    "RelativePath": "api/ApiCategory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prueba_Tecnica.Controllers.ApiCategoryController",
+    "Method": "Create",
+    "RelativePath": "api/ApiCategory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryDto",
+        "Type": "entities.DataContext.Dtos.CategoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prueba_Tecnica.Controllers.ApiCategoryController",
+    "Method": "GetById",
+    "RelativePath": "api/ApiCategory/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Prueba_Tecnica.Controllers.ApiCategoryController",
+    "Method": "Delete",
+    "RelativePath": "api/ApiCategory/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Prueba_Tecnica.Controllers.ApiProductController",
     "Method": "GetAll",
     "RelativePath": "api/ApiProduct",

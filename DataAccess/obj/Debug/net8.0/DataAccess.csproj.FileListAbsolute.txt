@@ -9,6 +9,7 @@ C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAcc
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.AssemblyInfoInputs.cache
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.AssemblyInfo.cs
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.sourcelink.json
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.csproj.Up2Date
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.dll
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\refint\DataAccess.dll

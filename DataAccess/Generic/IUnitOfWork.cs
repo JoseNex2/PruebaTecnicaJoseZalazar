@@ -11,7 +11,7 @@ namespace DataAccess.Generic
     public interface IUnitOfWork : IDisposable
     {
         ProductsDbContext Context { get; }
-        void Commit();
+        Task CommitAsync();
     }
 
     public class UnitOfWork : IUnitOfWork
@@ -23,9 +23,9 @@ namespace DataAccess.Generic
             Context = context;
         }
 
-        void IUnitOfWork.Commit()
+        public async Task CommitAsync()
         {
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
         void IDisposable.Dispose()
         {
