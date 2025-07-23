@@ -30,7 +30,7 @@ namespace Prueba_Tecnica.Controllers
             }
             catch (Exception m)
             {
-                return StatusCode(500, "Internal server error: " + m.Message);
+                return StatusCode(500, "Error interno del sistema: " + m.Message);
             }
         }
 
@@ -47,6 +47,7 @@ namespace Prueba_Tecnica.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             var category = await _unitOfWork.Context.categories.FindAsync(productDto.categoryId);
             if (category == null)
                 return BadRequest(new { msj = "La categoría especificada no existe." });
@@ -74,7 +75,7 @@ namespace Prueba_Tecnica.Controllers
             }
             catch (Exception m)
             {
-                return StatusCode(500, "Internal server error: " + m.Message);
+                return StatusCode(500, "Error interno del sistema: " + m.Message);
             }
         }
         [HttpPut("{id}")]
@@ -104,7 +105,7 @@ namespace Prueba_Tecnica.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Internal server error: " + ex.Message);
+                return StatusCode(500, "Error interno del sistema: " + ex.Message);
             }
         }
 
@@ -122,7 +123,7 @@ namespace Prueba_Tecnica.Controllers
             }
             catch (Exception m)
             {
-                return StatusCode(500, "Internal server error: " + m.Message);
+                return StatusCode(500, "Error interno del sistema: " + m.Message);
             }
         }
     }

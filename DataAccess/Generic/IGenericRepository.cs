@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using entities.DataContext;
+using entities.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Generic
@@ -12,102 +14,43 @@ namespace DataAccess.Generic
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
-        Task<bool> CreateAsync(T entity);
-        Task<bool> UpdateAsync(int id, T entity);
-        Task<bool> DeleteByIdAsync(int id);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(int id, T entity);
+        Task DeleteByIdAsync(T entity);
     }
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public readonly IUnitOfWork _unitOfWork;
+        protected readonly ProductsDbContext _context;
 
-        public GenericRepository(IUnitOfWork unitOfWork)
+        public GenericRepository(ProductsDbContext context)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
         }
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            try
-            {
-                return await _unitOfWork.Context.Set<T>().ToListAsync();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return await _context.Set<T>().ToListAsync();
         }
+
         public async Task<T> GetByIdAsync(int id)
         {
-            try
-            {
-                return await _unitOfWork.Context.Set<T>().FindAsync(id);
-            }
-            catch (Exception)
-            {
+            return await _context.Set<T>().FindAsync(id);
+        }
 
-                throw;
-            }
-        }
-        public async Task<bool> CreateAsync(T entiti)
+        public async Task CreateAsync(T entity)
         {
-            try
-            {
-                await _unitOfWork.Context.Set<T>().AddAsync(entiti);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-                throw;
-            }
+            await _context.Set<T>().AddAsync(entity);
         }
-        public async Task<bool> UpdateAsync(int id, T entity)
-        {
-            try
-            {
-                T existingEntity = await GetByIdAsync(id);
-                if (existingEntity != null)
-                {
-                    PropertyInfo[] properties = entity.GetType().GetProperties();
-                    foreach (PropertyInfo property in properties)
-                    {
-                        var newValue = property.GetValue(entity);
-                        if (newValue != null && property.Name != "Id")
-                        {
-                            property.SetValue(existingEntity, newValue);
-                        }
-                    }
-                    _unitOfWork.Context.Set<T>().Update(existingEntity);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public async Task<bool> DeleteByIdAsync(int id)
-        {
-            try
-            {
-                T entity = await GetByIdAsync(id);
-                if(entity != null)
-                {
-                    _unitOfWork.Context.Set<T>().Remove(entity);
-                    return true;
-                }
-                else return false;
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
+        public Task UpdateAsync(int id, T entity)
+        {
+            _context.Set<T>().Update(entity);
+            return Task.CompletedTask;
+        }
+        public Task DeleteByIdAsync(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            return Task.CompletedTask;
         }
     }
 }
