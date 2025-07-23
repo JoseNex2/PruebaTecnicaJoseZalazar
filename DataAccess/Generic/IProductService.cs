@@ -97,7 +97,7 @@ namespace DataAccess.Generic
                     Description = dto.Description,
                     Price = dto.Price,
                     Quantity = dto.Quantity,
-                    
+
                 } 
                 //var newProduct = _unitOfWork.Products.CreateAsync(dto);
             }
