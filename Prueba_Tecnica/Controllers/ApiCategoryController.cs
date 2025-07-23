@@ -1,5 +1,4 @@
 ﻿using DataAccess.Generic;
-using entities.DataContext.Dtos;
 using entities.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

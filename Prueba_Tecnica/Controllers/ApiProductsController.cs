@@ -11,13 +11,15 @@ namespace Prueba_Tecnica.Controllers
     [Route("api/[controller]")]
     public class ApiProductController : ControllerBase
     {
-        private readonly IGenericRepository<Product> _genericRepository;
-        private readonly IUnitOfWork _unitOfWork;
+        //private readonly IGenericRepository<Product> _genericRepository;
+        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductService<Product> _productService;
 
-        public ApiProductController(IGenericRepository<Product> genericRepository, IUnitOfWork unitOfWork)
+        public ApiProductController(IServiceProduct )
         {
             _genericRepository = genericRepository;
             _unitOfWork = unitOfWork;
+            _serviceProduct = 
         }
 
         [HttpGet]

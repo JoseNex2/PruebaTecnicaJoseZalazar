@@ -21,7 +21,6 @@ namespace DataAccess.Utils
         public static Result<T> Fail(string message)
         {
             return new Result<T>() { Success = false, Message = message };
-
         }
     }
 }

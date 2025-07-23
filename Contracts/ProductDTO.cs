@@ -12,7 +12,7 @@ namespace Contracts
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor que 0.")]
         public double Price { get; set; }
@@ -22,6 +22,7 @@ namespace Contracts
 
         [Required(ErrorMessage = "La categoría es obligatoria.")]
         [Range(1, int.MaxValue, ErrorMessage = "Debe seleccionar una categoría válida.")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
+        public string? CategoryName { get; set; } 
     }
 }

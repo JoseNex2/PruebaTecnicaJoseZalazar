@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 using DataAccess.Utils;
 using Contracts;
 using entities.Domain;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace DataAccess.Generic
 {
     internal interface IProductService
     {
-        Task<IEnumerable<ProductDTO>> GetAllAsync();
-        Task<ProductDTO?> GetByIdAsync(int id);
-        Task<Result<Product>> CreateAsync(ProductDTO dto);
-        Task<Result<Product>> UpdateAsync(int id, ProductDTO dto);
-        Task<Result<Product>> DeleteAsync(int id);
+        Task<Result<IEnumerable<ProductDTO>>> GetAllAsync();
+        Task<Result<ProductDTO?>> GetByIdAsync(int id);
+        Task<Result<ProductDTO>> CreateAsync(ProductDTO dto);
+        Task<Result<ProductDTO>> UpdateAsync(int id, ProductDTO dto);
+        Task<Result<bool>> DeleteAsync(int id);
     }
 
     public class ProductService: IProductService 
@@ -26,29 +27,87 @@ namespace DataAccess.Generic
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task <Result<IEnumerable<ProductDTO>>> GetAllAsync()
+        public async Task<Result<IEnumerable<ProductDTO>>> GetAllAsync()
         {
-            var products = await _unitOfWork.Products.GetAllAsync();
-
-            var productDtos = new List<ProductDTO>();
-
-            foreach (var product in products)
+            try
             {
-                var category = await _unitOfWork.Categories.GetByIdAsync(product.CategoryId);
+                var products = await _unitOfWork.Products.GetAllAsync();
 
-                productDtos.Add(new ProductDTO
+                var productDtos = new List<ProductDTO>();
+
+                foreach (var product in products)
                 {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    Quantity = product.Quantity,
-                    CategoryName = category?.Name ?? "Sin categoría"
-                });
-            }
+                    var category = await _unitOfWork.Categories.GetByIdAsync(product.CategoryId);
 
-            return Result<IEnumerable<ProductDto>>.Ok(productDtos);
+                    productDtos.Add(new ProductDTO
+                    {
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Quantity = product.Quantity,
+                        CategoryName = category?.Name?? "Sin categoria"
+                    });
+                }
+
+                return Result<IEnumerable<ProductDTO>>.Ok(productDtos);
+            }
+            catch (Exception ex)
+            {
+                return Result<IEnumerable<ProductDTO>>.Fail(ex.Message);
+            }
         }
+
+        public async Task<Result<ProductDTO?>> GetByIdAsync(int id)
+        {
+            try
+            {
+                var product = await _unitOfWork.Products.GetByIdAsync(id);
+
+                if (product != null)
+                {
+                    var category = await _unitOfWork.Categories.GetByIdAsync(product.CategoryId);
+                    var productDto = new ProductDTO()
+                    {
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Quantity = product.Quantity,
+                        CategoryName = category?.Name?? "Sin categoria"
+                    };
+
+                    return Result<ProductDTO?>.Ok(productDto, "");
+                }
+                else
+                {
+                    return Result<ProductDTO?>.Fail("No se encontro ningun Producto");  
+                }
+            }
+            catch (Exception ex)
+            {
+                return Result<ProductDTO?>.Fail($"Ocurrio un error interno: {ex.Message}");
+            }
+        }
+        public Task<Result<ProductDTO>> CreateAsync(ProductDTO dto)
+        {
+            try
+            {
+                var newProduct = new Product()
+                {
+                    Name = dto.Name,
+                    Description = dto.Description,
+                    Price = dto.Price,
+                    Quantity = dto.Quantity,
+                    
+                } 
+                //var newProduct = _unitOfWork.Products.CreateAsync(dto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        
     }
-    }
+    
 }
