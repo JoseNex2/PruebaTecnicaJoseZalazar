@@ -31,7 +31,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

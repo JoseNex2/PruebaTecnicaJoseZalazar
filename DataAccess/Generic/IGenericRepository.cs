@@ -16,7 +16,7 @@ namespace DataAccess.Generic
         Task<T> GetByIdAsync(int id);
         Task CreateAsync(T entity);
         Task UpdateAsync(int id, T entity);
-        Task DeleteByIdAsync(T entity);
+        Task DeleteByEntitiAsync(T entity);
     }
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -47,7 +47,7 @@ namespace DataAccess.Generic
             _context.Set<T>().Update(entity);
             return Task.CompletedTask;
         }
-        public Task DeleteByIdAsync(T entity)
+        public Task DeleteByEntitiAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             return Task.CompletedTask;

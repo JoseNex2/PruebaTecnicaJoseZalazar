@@ -11,5 +11,31 @@ namespace Contracts
     {
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         public string Name { get; set; }
+
+
+        public CategoryDTO(string name)
+        {
+            Name = name;
+        }
+
+        public CategoryDTO()
+        {
+            
+        }
+    }
+
+    public class CategoryDTOSalida
+    {
+        public string Name { get; set; }
+
+        public CategoryDTOSalida(string name)
+        {
+            Name = name;
+        }
+
+        public CategoryDTOSalida()
+        {
+            
+        }
     }
 }
