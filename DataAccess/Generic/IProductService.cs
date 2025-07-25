@@ -11,10 +11,11 @@ using System.Reflection.Metadata;
 
 namespace DataAccess.Generic
 {
-    internal interface IProductService
+    public interface IProductService
     {
-        Task<Result<IEnumerable<ProductDTOSalida>>> GetAllProductAsync();
+        Task<Result<IEnumerable<ProductDTOSalida>>> GetAllProductsAsync();
         Task<Result<ProductDTOSalida?>> GetProductByIdAsync(int id);
+        Task<Result<IEnumerable<ProductDTOSalida>>> GetProductsByName(string name);
         Task<Result<ProductDTOSalida>> CreateProductAsync(ProductDTO dto);
         Task<Result<ProductDTO>> UpdateProductAsync(int id, ProductDTO dto);
         Task<Result<bool>> DeleteAsync(int id);
@@ -28,7 +29,7 @@ namespace DataAccess.Generic
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<Result<IEnumerable<ProductDTOSalida>>> GetAllProductAsync()
+        public async Task<Result<IEnumerable<ProductDTOSalida>>> GetAllProductsAsync()
         {
             try
             {
@@ -69,7 +70,7 @@ namespace DataAccess.Generic
                 if (product != null)
                 {
 
-                    var productDtoS = new ProductDTOSalida()
+                    var productDtos = new ProductDTOSalida()
                     {
                         Name = product.Name,
                         Description = product.Description,
@@ -81,7 +82,7 @@ namespace DataAccess.Generic
                         }
                     };
 
-                    return Result<ProductDTOSalida?>.Ok(productDtoS, "");
+                    return Result<ProductDTOSalida?>.Ok(productDtos);
                 }
                 else
                 {
@@ -91,6 +92,37 @@ namespace DataAccess.Generic
             catch (Exception ex)
             {
                 return Result<ProductDTOSalida?>.Fail($"Ocurrio un error interno: {ex.Message}");
+            }
+        }
+
+        public async Task<Result<IEnumerable<ProductDTOSalida>>> GetProductsByName(string name)
+        {
+            try
+            {
+                var products = await _unitOfWork.Products.FindManyAsync(
+                    p => p.Name.ToLower() == name.ToLower());
+
+                var productsDtos = new List<ProductDTOSalida>();
+
+                foreach (var product in products)
+                {
+                    productsDtos.Add(new ProductDTOSalida()
+                    {
+                        Name = product.Name,
+                        Description = product.Description,
+                        Price = product.Price,
+                        Quantity = product.Quantity,
+                        Category = new CategoryDTOSalida()
+                        {
+                            Name = product.Category?.Name?? "Sin catgoria"
+                        }
+                    }); 
+                }
+                return Result<IEnumerable<ProductDTOSalida>>.Ok(productsDtos);
+            }
+            catch (Exception ex)
+            {
+                return Result<IEnumerable<ProductDTOSalida>>.Fail($"Ha ocurrio un error interno: {ex.Message}");
             }
         }
         public async Task<Result<ProductDTOSalida>> CreateProductAsync(ProductDTO dto)
@@ -103,7 +135,8 @@ namespace DataAccess.Generic
                     Description = dto.Description,
                     Price = dto.Price,
                     Quantity = dto.Quantity,
-                    CategoryId = dto.CategoryId
+                    CategoryId = dto.CategoryId,
+                    FechaCreacion = DateTime.Now
                 };
 
                 await _unitOfWork.Products.CreateAsync(newProduct);

@@ -1,12 +1,13 @@
-﻿using System;
+﻿using entities.DataContext;
+using entities.Domain;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using entities.DataContext;
-using entities.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Generic
 {
@@ -14,6 +15,7 @@ namespace DataAccess.Generic
     {
         Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
+        Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> predicate);
         Task CreateAsync(T entity);
         Task UpdateAsync(int id, T entity);
         Task DeleteByEntitiAsync(T entity);
@@ -37,6 +39,10 @@ namespace DataAccess.Generic
             return await _context.Set<T>().FindAsync(id);
         }
 
+        public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
         public async Task CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -52,5 +58,6 @@ namespace DataAccess.Generic
             _context.Set<T>().Remove(entity);
             return Task.CompletedTask;
         }
+
     }
 }
