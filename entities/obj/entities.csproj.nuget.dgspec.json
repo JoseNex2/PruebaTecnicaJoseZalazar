@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj": {}
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj": {
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj",
+        "projectUniqueName": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj",
         "projectName": "entities",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\obj\\",
+        "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj",
+        "packagesPath": "C:\\Users\\Jose Zalazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jose Zalazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -81,6 +81,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "PlusPagosSecurityKitCore": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -99,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

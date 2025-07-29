@@ -1,113 +1,77 @@
-﻿using System;
+﻿using entities.DataContext;
+using entities.Domain;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Generic
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task<bool> CreateAsync(T entity);
-        Task<bool> UpdateAsync(int id, T entity);
-        Task<bool> DeleteByIdAsync(int id);
+        IQueryable<T> GetAllAsync(Expression<Func<T, bool>>? condition = null);
+        Task<T?> GetByIdAsync(int id);
+        Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> predicate);
+        Task CreateAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteByEntityAsync(T entity);
+        Task<Product?> GetByIdWithCategoryAsync(int id);
     }
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public readonly IUnitOfWork _unitOfWork;
+        protected readonly ProductsDbContext _context;
 
-        public GenericRepository(IUnitOfWork unitOfWork)
+        public GenericRepository(ProductsDbContext context)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public IQueryable<T> GetAllAsync(Expression<Func<T, bool>>? condition = null)
         {
-            try
+            var query = _context.Set<T>().AsQueryable(); 
+            
+            if(condition != null)
             {
-                return await _unitOfWork.Context.Set<T>().ToListAsync();
+                return query.Where(condition);
             }
-            catch (Exception)
-            {
+            return query;
+        }
 
-                throw;
-            }
-        }
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            try
-            {
-                return await _unitOfWork.Context.Set<T>().FindAsync(id);
-            }
-            catch (Exception)
-            {
+            return await _context.Set<T>().FindAsync(id);
+        }
 
-                throw;
-            }
-        }
-        public async Task<bool> CreateAsync(T entiti)
+        public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> condition)
         {
-            try
-            {
-                await _unitOfWork.Context.Set<T>().AddAsync(entiti);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-                throw;
-            }
+            return await _context.Set<T>().Where(condition).ToListAsync();
         }
-        public async Task<bool> UpdateAsync(int id, T entity)
+        public async Task CreateAsync(T entity)
         {
-            try
-            {
-                T existingEntity = await GetByIdAsync(id);
-                if (existingEntity != null)
-                {
-                    PropertyInfo[] properties = entity.GetType().GetProperties();
-                    foreach (PropertyInfo property in properties)
-                    {
-                        var newValue = property.GetValue(entity);
-                        if (newValue != null && property.Name != "Id")
-                        {
-                            property.SetValue(existingEntity, newValue);
-                        }
-                    }
-                    _unitOfWork.Context.Set<T>().Update(existingEntity);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            await _context.Set<T>().AddAsync(entity);
         }
-        public async Task<bool> DeleteByIdAsync(int id)
-        {
-            try
-            {
-                T entity = await GetByIdAsync(id);
-                if(entity != null)
-                {
-                    _unitOfWork.Context.Set<T>().Remove(entity);
-                    return true;
-                }
-                else return false;
-            }
-            catch (Exception)
-            {
 
-                throw;
-            }
+        public Task UpdateAsync(T entity)
+        {
+            _context.Set<T>().Update(entity);
+            return Task.CompletedTask;
         }
+        public Task DeleteByEntityAsync(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+            return Task.CompletedTask;
+        }
+
+        public async Task<Product?> GetByIdWithCategoryAsync(int id)
+        {
+            return await _context.products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
     }
 }

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\Prueba_Tecnica\\Prueba_Tecnica.csproj": {}
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Prueba_Tecnica\\Prueba_Tecnica.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\DataAccess.csproj": {
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\DataAccess.csproj",
-        "projectName": "DataAccess",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\obj\\",
+        "projectUniqueName": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj",
+        "projectName": "Contracts",
+        "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\Jose Zalazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jose Zalazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj"
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj"
               }
             }
           }
@@ -48,7 +48,79 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\DataAccess.csproj",
+        "projectName": "DataAccess",
+        "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\DataAccess.csproj",
+        "packagesPath": "C:\\Users\\Jose Zalazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Jose Zalazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj"
+              },
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -77,6 +149,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "PlusPagosSecurityKitCore": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -95,24 +171,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj": {
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj",
+        "projectUniqueName": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj",
         "projectName": "entities",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\entities.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\entities\\obj\\",
+        "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\entities.csproj",
+        "packagesPath": "C:\\Users\\Jose Zalazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jose Zalazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -139,7 +215,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -176,6 +252,10 @@
             "Microsoft.Extensions.Configuration.Json": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "PlusPagosSecurityKitCore": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -194,24 +274,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\Prueba_Tecnica\\Prueba_Tecnica.csproj": {
+    "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Prueba_Tecnica\\Prueba_Tecnica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\Prueba_Tecnica\\Prueba_Tecnica.csproj",
+        "projectUniqueName": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Prueba_Tecnica\\Prueba_Tecnica.csproj",
         "projectName": "Prueba_Tecnica",
-        "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\Prueba_Tecnica\\Prueba_Tecnica.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\Prueba_Tecnica\\obj\\",
+        "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Prueba_Tecnica\\Prueba_Tecnica.csproj",
+        "packagesPath": "C:\\Users\\Jose Zalazar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Prueba_Tecnica\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jose Zalazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -226,8 +306,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\source\\repos\\Prueba_Tecnica\\DataAccess\\DataAccess.csproj"
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\Contracts\\Contracts.csproj"
+              },
+              "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Jose Zalazar\\Source\\Repos\\PruebaTecnicaJoseZalazar\\DataAccess\\DataAccess.csproj"
               }
             }
           }
@@ -242,7 +325,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -272,6 +355,14 @@
               "target": "Package",
               "version": "[9.0.4, )"
             },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.21.0, )"
+            },
+            "PlusPagosSecurityKitCore": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[8.1.1, )"
@@ -296,7 +387,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

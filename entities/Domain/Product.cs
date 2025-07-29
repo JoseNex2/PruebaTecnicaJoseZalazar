@@ -12,16 +12,14 @@ namespace entities.Domain
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id {  get; set; } 
-        [Required]
-        public string name { get; set; }
-        public string description { get; set; }
-        public double price { get; set; }
-        public int quantity { get; set; }
-        [Required]
-        public int categoryId { get; set; }
-
-        public Category category { get; set; }
+        public int Id {  get; set; } 
+        public string Name { get; set; }
+        public string? Description { get; set; }
+        public double Price { get; set; }
+        public int Quantity { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+        public DateTime FechaCreacion {get; set; }
 
     }
 }

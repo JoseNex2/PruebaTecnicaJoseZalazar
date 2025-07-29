@@ -10,26 +10,32 @@ namespace DataAccess.Generic
 {
     public interface IUnitOfWork : IDisposable
     {
-        ProductsDbContext Context { get; }
+        IGenericRepository<Product> Products { get; }
+        IGenericRepository<Category> Categories { get; }
         Task CommitAsync();
     }
 
     public class UnitOfWork : IUnitOfWork
     {
-        public ProductsDbContext Context { get; }
+        private readonly ProductsDbContext _context;
+
+        public IGenericRepository<Product> Products { get; }
+        public IGenericRepository<Category> Categories { get; }
 
         public UnitOfWork(ProductsDbContext context)
         {
-            Context = context;
+            _context = context;
+            Products = new GenericRepository<Product>(_context);
+            Categories = new GenericRepository<Category>(_context);
         }
 
         public async Task CommitAsync()
         {
-            await Context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
         void IDisposable.Dispose()
         {
-            Context.Dispose();
+            _context.Dispose();
         }
     }
 }

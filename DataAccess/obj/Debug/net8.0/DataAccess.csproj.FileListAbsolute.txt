@@ -16,3 +16,21 @@ C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\refint\
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.pdb
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\DataAccess.genruntimeconfig.cache
 C:\Users\Usuario\source\repos\Prueba_Tecnica\DataAccess\obj\Debug\net8.0\ref\DataAccess.dll
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\DataAccess.deps.json
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\DataAccess.runtimeconfig.json
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\DataAccess.dll
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\DataAccess.pdb
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\entities.dll
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\bin\Debug\net8.0\entities.pdb
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.csproj.AssemblyReference.cache
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.AssemblyInfo.cs
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.sourcelink.json
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.csproj.Up2Date
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.dll
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\refint\DataAccess.dll
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.pdb
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\DataAccess.genruntimeconfig.cache
+C:\Users\Jose Zalazar\Source\Repos\PruebaTecnicaJoseZalazar\DataAccess\obj\Debug\net8.0\ref\DataAccess.dll

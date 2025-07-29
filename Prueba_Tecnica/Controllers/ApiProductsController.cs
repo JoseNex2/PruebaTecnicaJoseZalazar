@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Timers;
-using DataAccess.Generic;
-using entities.DataContext.Dtos;
+using Contracts;
+using DataAccess.Services2;
 using entities.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,119 +11,74 @@ namespace Prueba_Tecnica.Controllers
     [Route("api/[controller]")]
     public class ApiProductController : ControllerBase
     {
-        private readonly IGenericRepository<Product> _genericRepository;
-        private readonly IUnitOfWork _unitOfWork;
-
-        public ApiProductController(IGenericRepository<Product> genericRepository, IUnitOfWork unitOfWork)
-        {
-            _genericRepository = genericRepository;
-            _unitOfWork = unitOfWork;
+        //private readonly IGenericRepository<Product> _genericRepository;
+        //private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductService _productService;
+        public ApiProductController(IProductService productService)
+        { 
+            //_genericRepository = genericRepository;
+            //_unitOfWork = unitOfWork;
+            _productService = productService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            try
+            var result = await _productService.GetAllProductsAsync();
+            if (result.Success)
             {
-                var products = await _genericRepository.GetAllAsync();
-                return Ok(products);
+                return Ok(result.Data);
             }
-            catch (Exception m)
-            {
-                return StatusCode(500, "Internal server error: " + m.Message);
-            }
+            return StatusCode(400, result.Message);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var products = await _genericRepository.GetByIdAsync(id);
-            if (products == null)
-                return NotFound(new { msj = $"El producto con id {id} no existe" });
-            else { return Ok(products); }
+            var result = await _productService.GetProductByIdAsync(id);
+            if (result.Success && result.Data != null)
+                return Ok(result);
+
+            return NotFound(new { msj = result.Message });
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] ProductDto productDto)
+        public async Task<IActionResult> Create([FromBody] ProductDTO productDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-            var category = await _unitOfWork.Context.categories.FindAsync(productDto.categoryId);
-            if (category == null)
-                return BadRequest(new { msj = "La categoría especificada no existe." });
 
-            var product = new Product
-            {
-                name = productDto.name,
-                description = productDto.description,
-                price = productDto.price,
-                quantity = productDto.quantity
+            var result = await _productService.CreateProductAsync(productDto);
 
-            };
-        
-            try
-            {
-                if (await _genericRepository.CreateAsync(product))
-                {
-                    await _unitOfWork.CommitAsync();
-                    return Ok(new { msj = "Producto creado con éxito." });
-                }
-                else
-                {
-                    return StatusCode(500, "Error al crear el producto.");
-                }
-            }
-            catch (Exception m)
-            {
-                return StatusCode(500, "Internal server error: " + m.Message);
-            }
+            if (result.Success && result.Data != null)
+                return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+            
+            return StatusCode(500, new {msj = result.Message});
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] ProductDto productDto)
+        public async Task<IActionResult> Update(int id, [FromBody] ProductDTO productDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
-            var product = new Product
-            {
-                id = id,
-                name = productDto.name,
-                description = productDto.description,
-                price = productDto.price,
-                quantity = productDto.quantity
-            };
+            var result = await _productService.UpdateProductAsync(id, productDto); 
 
-            try
-            {
-                if (await _genericRepository.UpdateAsync(id, product))
-                {
-                    await _unitOfWork.CommitAsync();
-                    return Ok(new { mensaje = "Producto actualizado correctamente." });
-                }
+            if (result.Success)
+                return Ok(result.Data);
 
-                return NotFound(new { msj = $"El producto con id {id} no existe" });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+            return NotFound(new { msj = result.Message });
+
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                if (await _genericRepository.DeleteByIdAsync(id))
-                {
-                    await _unitOfWork.CommitAsync(); 
-                    return Ok(new { message = "Producto borrado con exito" });
-                }
-                return NotFound(new {msj = $"El producto con id {id} no existe" });
-            }
-            catch (Exception m)
-            {
-                return StatusCode(500, "Internal server error: " + m.Message);
-            }
+
+            var result = await _productService.DeleteAsync(id);
+
+            if (result.Success && result.Data)
+                return Ok(new { result.Message });
+
+            if (!result.Success)
+                return StatusCode(500, new { msj = result.Message });
+
+            return NotFound(new { result.Message });
+
         }
     }
 }
