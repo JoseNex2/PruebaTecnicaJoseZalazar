@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Timers;
 using Contracts;
-using DataAccess.Generic;
+using DataAccess.Services2;
 using entities.Domain;
 using Microsoft.AspNetCore.Mvc;
 

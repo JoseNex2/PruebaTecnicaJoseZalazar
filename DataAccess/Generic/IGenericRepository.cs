@@ -13,12 +13,13 @@ namespace DataAccess.Generic
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
+        IQueryable<T> GetAllAsync(Expression<Func<T, bool>>? condition = null);
+        Task<T?> GetByIdAsync(int id);
         Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> predicate);
         Task CreateAsync(T entity);
-        Task UpdateAsync(int id, T entity);
-        Task DeleteByEntitiAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteByEntityAsync(T entity);
+        Task<Product?> GetByIdWithCategoryAsync(int id);
     }
 
     public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -29,34 +30,47 @@ namespace DataAccess.Generic
         {
             _context = context;
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public IQueryable<T> GetAllAsync(Expression<Func<T, bool>>? condition = null)
         {
-            return await _context.Set<T>().ToListAsync();
+            var query = _context.Set<T>().AsQueryable(); 
+            
+            if(condition != null)
+            {
+                return query.Where(condition);
+            }
+            return query;
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> FindManyAsync(Expression<Func<T, bool>> condition)
         {
-            return await _context.Set<T>().Where(predicate).ToListAsync();
+            return await _context.Set<T>().Where(condition).ToListAsync();
         }
         public async Task CreateAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
         }
 
-        public Task UpdateAsync(int id, T entity)
+        public Task UpdateAsync(T entity)
         {
             _context.Set<T>().Update(entity);
             return Task.CompletedTask;
         }
-        public Task DeleteByEntitiAsync(T entity)
+        public Task DeleteByEntityAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             return Task.CompletedTask;
+        }
+
+        public async Task<Product?> GetByIdWithCategoryAsync(int id)
+        {
+            return await _context.products
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
     }

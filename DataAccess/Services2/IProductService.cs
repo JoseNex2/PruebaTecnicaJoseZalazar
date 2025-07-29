@@ -8,8 +8,9 @@ using Contracts;
 using entities.Domain;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Reflection.Metadata;
+using DataAccess.Generic;
 
-namespace DataAccess.Generic
+namespace DataAccess.Services2
 {
     public interface IProductService
     {
@@ -17,7 +18,7 @@ namespace DataAccess.Generic
         Task<Result<ProductDTOSalida?>> GetProductByIdAsync(int id);
         Task<Result<IEnumerable<ProductDTOSalida>>> GetProductsByName(string name);
         Task<Result<ProductDTOSalida>> CreateProductAsync(ProductDTO dto);
-        Task<Result<ProductDTO>> UpdateProductAsync(int id, ProductDTO dto);
+        Task<Result<ProductDTOSalida>> UpdateProductAsync(int id, ProductDTO dto);
         Task<Result<bool>> DeleteAsync(int id);
     }
 
@@ -33,7 +34,7 @@ namespace DataAccess.Generic
         {
             try
             {
-                var products = await _unitOfWork.Products.GetAllAsync();
+                var products = _unitOfWork.Products.GetAllAsync();
 
                 var productDtos = new List<ProductDTOSalida>();
 
@@ -160,30 +161,43 @@ namespace DataAccess.Generic
                 return Result<ProductDTOSalida>.Fail($"Ha ocurrido un error: {ex.Message}");
             }
         }
-        public async Task<Result<ProductDTO>> UpdateProductAsync(int id, ProductDTO dto)
+        public async Task<Result<ProductDTOSalida>> UpdateProductAsync(int id, ProductDTO dto)
         {
             try
             {
-                var productEdit = await _unitOfWork.Products.GetByIdAsync(id);
+                var existProduct = await _unitOfWork.Products.GetByIdAsync(id);
 
-                if (productEdit != null)
+                if (existProduct != null)
                 {
-                    productEdit.Name = dto.Name;
-                    productEdit.Description = dto.Description;
-                    productEdit.Price = dto.Price;
-                    productEdit.Quantity = dto.Quantity;
-                    productEdit.CategoryId = dto.CategoryId;
+                    existProduct.Name = dto.Name;
+                    existProduct.Description = dto.Description;
+                    existProduct.Price = dto.Price;
+                    existProduct.Quantity = dto.Quantity;
+                    existProduct.CategoryId = dto.CategoryId;
 
-                    await _unitOfWork.Products.UpdateAsync(id, productEdit);
+                    await _unitOfWork.Products.UpdateAsync(existProduct);
                     await _unitOfWork.CommitAsync();
 
-                    return Result<ProductDTO>.Ok(dto, "Producto actualizado exitosamente");
+                    var productdto = new ProductDTOSalida
+                    {
+                        Id= existProduct.Id,
+                        Name = existProduct.Name,
+                        Description = existProduct.Description,
+                        Price = existProduct.Price,
+                        Quantity = existProduct.Quantity,
+                        Category = new CategoryDTOSalida()
+                        {
+                            Name = existProduct.Category?.Name?? "Sin categoria"
+                        }
+                    };
+
+                    return Result<ProductDTOSalida>.Ok(productdto,"Producto actualizado exitosamente");
                 }
-                return Result<ProductDTO>.Fail($"El producto con el id {id} no existe");
+                return Result<ProductDTOSalida>.Fail($"El producto con el id {id} no existe");
             }
             catch (Exception ex)
             {
-                return Result<ProductDTO>.Fail($"Ha ocurrido un error: {ex.Message}"); 
+                return Result<ProductDTOSalida>.Fail($"Ha ocurrido un error: {ex.Message}"); 
             }
         }
 
@@ -195,17 +209,17 @@ namespace DataAccess.Generic
 
                 if (existingProduct != null)
                 {
-                    await _unitOfWork.Products.DeleteByEntitiAsync(existingProduct);
+                    await _unitOfWork.Products.DeleteByEntityAsync(existingProduct);
                     await _unitOfWork.CommitAsync();
                     
-                    return Result<Boolean>.Ok(true, "El producto se borro correctamente");
+                    return Result<bool>.Ok(true, "El producto se borro correctamente");
                 }
 
-                return Result<Boolean>.Fail($"El producto con el id {id} no existe");
+                return Result<bool>.Fail($"El producto con el id {id} no existe");
             }
             catch (Exception ex)
             {
-                return Result<Boolean>.Fail($"Ha ocurrido un error: {ex.Message}");
+                return Result<bool>.Fail($"Ha ocurrido un error: {ex.Message}");
             }
         }
     }
