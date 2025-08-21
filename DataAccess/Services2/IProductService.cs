@@ -212,7 +212,7 @@ namespace DataAccess.Services2
                     await _unitOfWork.Products.DeleteByEntityAsync(existingProduct);
                     await _unitOfWork.CommitAsync();
                     
-                    return Result<object?>.Ok(null, "El producto se borro correctamente");
+                    return Result<object?>.Ok("El producto se borro correctamente");
                 }
 
                 return Result<object?>.Fail($"El producto con el id {id} no existe");

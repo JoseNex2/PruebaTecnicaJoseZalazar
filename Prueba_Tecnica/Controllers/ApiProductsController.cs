@@ -28,9 +28,9 @@ namespace Prueba_Tecnica.Controllers
             var result = await _productService.GetAllProductsAsync();
             if (result.Success)
             {
-                return Ok(result);
+                return StatusCode((int)HttpStatusCode.OK, result);
             }
-            return StatusCode(400, result.Message);
+            return StatusCode((int)HttpStatusCode.InternalServerError, result);
         }
 
         [HttpGet("{id}")]
@@ -74,13 +74,13 @@ namespace Prueba_Tecnica.Controllers
 
             var result = await _productService.DeleteAsync(id);
 
-            if (result.Success && result.Response)
+            if (result.Success && result.Response != null)
                 return StatusCode((int)HttpStatusCode.OK, result);
 
-            if (!result.Success)
-                return StatusCode((int)HttpStatusCode., result);
+            if (!result.Success && result.Response == null)
+                return StatusCode((int)HttpStatusCode.NotFound, result);
 
-            return NotFound(new { result.Message });
+            return StatusCode((int)HttpStatusCode.InternalServerError, result);
 
         }
     }

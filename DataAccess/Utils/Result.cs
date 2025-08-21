@@ -11,10 +11,10 @@ namespace DataAccess.Utils
     {
         public bool Success { get; set; }
         public string Message { get; set; } = "";
-        public default(T)? Response { get; set; } = null;
+        public T? Response { get; set; }
         public int Code { get; set; }
 
-        public static Result<T> Ok(T response = null, string message = "")
+        public static Result<T> Ok(T response, string message = "")
         {
             return new Result<T>() { Success = true, Response = response, Message = message };
         }
@@ -23,5 +23,7 @@ namespace DataAccess.Utils
         {
             return new Result<T>() { Success = false, Message = message };
         }
+
+        
     }
 }
