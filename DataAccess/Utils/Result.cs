@@ -11,11 +11,12 @@ namespace DataAccess.Utils
     {
         public bool Success { get; set; }
         public string Message { get; set; } = "";
-        public T? Data { get; set; }
+        public default(T)? Response { get; set; } = null;
+        public int Code { get; set; }
 
-        public static Result<T> Ok(T data, string message = "")
+        public static Result<T> Ok(T response = null, string message = "")
         {
-            return new Result<T>() { Success = true, Data = data, Message = message };
+            return new Result<T>() { Success = true, Response = response, Message = message };
         }
 
         public static Result<T> Fail(string message)

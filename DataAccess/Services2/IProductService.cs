@@ -19,7 +19,7 @@ namespace DataAccess.Services2
         Task<Result<IEnumerable<ProductDTOSalida>>> GetProductsByName(string name);
         Task<Result<ProductDTOSalida>> CreateProductAsync(ProductDTO dto);
         Task<Result<ProductDTOSalida>> UpdateProductAsync(int id, ProductDTO dto);
-        Task<Result<bool>> DeleteAsync(int id);
+        Task<Result<object?>> DeleteAsync(int id);
     }
 
     public class ProductService: IProductService 
@@ -201,7 +201,7 @@ namespace DataAccess.Services2
             }
         }
 
-        public async Task<Result<bool>> DeleteAsync(int id)
+        public async Task<Result<object?>> DeleteAsync(int id)
         {
             try
             {
@@ -212,14 +212,14 @@ namespace DataAccess.Services2
                     await _unitOfWork.Products.DeleteByEntityAsync(existingProduct);
                     await _unitOfWork.CommitAsync();
                     
-                    return Result<bool>.Ok(true, "El producto se borro correctamente");
+                    return Result<object?>.Ok(null, "El producto se borro correctamente");
                 }
 
-                return Result<bool>.Fail($"El producto con el id {id} no existe");
+                return Result<object?>.Fail($"El producto con el id {id} no existe");
             }
             catch (Exception ex)
             {
-                return Result<bool>.Fail($"Ha ocurrido un error: {ex.Message}");
+                return Result<object?>.Fail($"Ha ocurrido un error: {ex.Message}");
             }
         }
     }

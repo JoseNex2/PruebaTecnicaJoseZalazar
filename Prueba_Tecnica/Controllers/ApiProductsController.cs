@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Timers;
-using Contracts;
+﻿using Contracts;
 using DataAccess.Services2;
 using entities.Domain;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Timers;
 
 namespace Prueba_Tecnica.Controllers
 {
@@ -27,7 +28,7 @@ namespace Prueba_Tecnica.Controllers
             var result = await _productService.GetAllProductsAsync();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return StatusCode(400, result.Message);
         }
@@ -36,10 +37,12 @@ namespace Prueba_Tecnica.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await _productService.GetProductByIdAsync(id);
-            if (result.Success && result.Data != null)
-                return Ok(result);
+            if (result.Success && result.Response != null)
+            {
+                return StatusCode((int)HttpStatusCode.OK, result);
+            }
 
-            return NotFound(new { msj = result.Message });
+            return StatusCode((int)HttpStatusCode.NotFound, result);
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductDTO productDto)
@@ -47,8 +50,8 @@ namespace Prueba_Tecnica.Controllers
 
             var result = await _productService.CreateProductAsync(productDto);
 
-            if (result.Success && result.Data != null)
-                return CreatedAtAction(nameof(GetById), new { id = result.Data.Id }, result.Data);
+            if (result.Success && result.Response != null)
+                return CreatedAtAction(nameof(GetById), new { id = result.Response.Id }, result.Response);
             
             return StatusCode(500, new {msj = result.Message});
         }
@@ -59,7 +62,7 @@ namespace Prueba_Tecnica.Controllers
             var result = await _productService.UpdateProductAsync(id, productDto); 
 
             if (result.Success)
-                return Ok(result.Data);
+                return Ok(result.Response);
 
             return NotFound(new { msj = result.Message });
 
@@ -71,11 +74,11 @@ namespace Prueba_Tecnica.Controllers
 
             var result = await _productService.DeleteAsync(id);
 
-            if (result.Success && result.Data)
-                return Ok(new { result.Message });
+            if (result.Success && result.Response)
+                return StatusCode((int)HttpStatusCode.OK, result);
 
             if (!result.Success)
-                return StatusCode(500, new { msj = result.Message });
+                return StatusCode((int)HttpStatusCode., result);
 
             return NotFound(new { result.Message });
 
